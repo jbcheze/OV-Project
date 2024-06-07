@@ -19,9 +19,16 @@ torchvision = "^0.18.0"
 torchaudio = "^2.3.0"
 numpy = "^1.26.4"
 python-dotenv = "^1.0.1"
+faiss-cpu = "^1.8.0"
+langchain-cli = "^0.0.24"
+chromadb = "^0.5.0"
+openai = "^1.31.1"
+tiktoken = "^0.7.0"
+sentencepiece = "^0.2.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
+ipykernel = "^6.29.4"
 
 [build-system]
 requires = ["poetry-core"]
