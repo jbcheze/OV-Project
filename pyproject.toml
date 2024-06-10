@@ -25,11 +25,15 @@ chromadb = "^0.5.0"
 openai = "^1.31.1"
 tiktoken = "^0.7.0"
 sentencepiece = "^0.2.0"
+<<<<<<< HEAD
 langchain-openai = "^0.1.8"
 langchain-cohere = "^0.1.5"
 langchainhub = "^0.1.17"
 bs4 = "^0.0.2"
 pydantic = "^2.7.3"
+=======
+chroma = "^0.2.0"
+>>>>>>> 05946453901369950fe60ec83a92bbf8ba3365fe
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
