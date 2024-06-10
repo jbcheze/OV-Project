@@ -4,23 +4,23 @@ from langchain.chains.question_answering import load_qa_chain
 from langchain_cohere import ChatCohere
 
 
-def summarize_text_with_cohere(
-    text, cohere_client
-):  # Objectif : Générer un résumé d'un texte en utilisant l'API Cohere.
-    response = cohere_client.generate(
-        model="command-xlarge-nightly",
-        prompt=f"Summarize this: {text}",
-        max_tokens=100,
-        temperature=0.5,
-    )
-    summary = response.generations[0].text.strip()
-    return summary
+# def summarize_text_with_cohere(
+#     text, cohere_client
+# ):  # Objectif : Générer un résumé d'un texte en utilisant l'API Cohere.
+#     response = cohere_client.generate(
+#         model="command-xlarge-nightly",
+#         prompt=f"Summarize this: {text}",
+#         max_tokens=100,
+#         temperature=0.5,
+#     )
+#     summary = response.generations[0].text.strip()
+#     return summary
 
 
-def chatting_with_cohere(prompt, cohere_client):
+def chatting_with_cohere(text, cohere_client):
     response = cohere_client.generate(
         model="command-xlarge-nightly",
-        prompt=prompt,
+        prompt=f" Fais un résumé de ce {text} en 7 lignes maximum. Ecris un titre au début et rédige ton paragraphe de façon claire et précise.",
         max_tokens=100,
         temperature=0.5,
     )
