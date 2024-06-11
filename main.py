@@ -18,8 +18,8 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
     st.set_page_config(page_title="OV-Compromis", page_icon=":house:")
     st.header("Compromis de vente immobilier :house:")
     with st.sidebar:
-        img_path = "images/logo_ov.png"
-        st.image(img_path, use_column_width=True)
+        img_path = "images/logo_ov2.png"
+        st.image(img_path, use_column_width=True)  # width=120
         st.subheader("Vos documents")
         pdf_docs = st.file_uploader(
             "Téléchargez vos PDFs ici et cliquez sur 'Process'",
