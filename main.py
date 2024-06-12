@@ -3,10 +3,7 @@ import streamlit as st
 import cohere
 from dotenv import load_dotenv
 from pdf_to_vectorstore import get_pdf_text, get_text_chunks, get_vectorstore
-from cohere_fct import (
-    chatting_with_cohere,
-    response_to_question,
-)
+from cohere_fct import chatting_with_cohere, response_to_question, prompting_draft
 import base64
 
 load_dotenv()
