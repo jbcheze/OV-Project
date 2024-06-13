@@ -55,6 +55,7 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
             "Téléchargez vos PDFs ici et cliquez sur 'Process'",
             accept_multiple_files=True,
         )
+
         if st.button("Process"):
             with st.spinner("Traitement en cours"):
                 # get the pdf text
@@ -68,6 +69,9 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
                 if vectorstore:
                     st.success("Document téléchargé avec succès !")
                     st.session_state.vectorstore = vectorstore
+
+        if st.button("Simulateur de risque"):
+            st.switch_page("pages/page2.py")
 
     if "vectorstore" in st.session_state:
         with st.container(border=True):
