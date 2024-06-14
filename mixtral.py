@@ -1,4 +1,4 @@
-from langchain_community.llms import VLLMOpenAI
+from langchain_community.llms.vllm import VLLMOpenAI
 import os
 from dotenv import load_dotenv
 
