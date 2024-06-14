@@ -25,7 +25,19 @@ def prompting_draft(text):
 def chatting_with_cohere(text, cohere_client):
     response = cohere_client.generate(
         model="command-xlarge-nightly",
-        prompt=f" Fais un résumé de ce {text} en 7 lignes maximum. Ecris un titre au début et rédige ton paragraphe de façon claire et précise.",
+        prompt=f"""
+    Je souhaite que tu me rédiges un résumé de ce {text} qui sera organisé selon les points suivants:
+    - section "Coordonnées du Vendeur et de l'Acquéreur" 
+    - section "Bien Immobilier" 
+    - section "Hypothèque et servitudes"
+    - section "Dossier du Diagnostic Technique (DDT)
+    - section "Montant et Modalités de Paiement"
+    - section "Durée de Validité de la Promesse de Vente et Date Limite de Signature de l'Acte de Vente Définitif"
+    - section "Montant de l'Indemnité d'Immobilisation et Conditions Suspensives"
+
+
+    Tu rempliras chaque section avec les informations adéquates en organisant ton compte-rendu en bullet points.
+    """,
         max_tokens=1000,
         temperature=0.5,
     )
