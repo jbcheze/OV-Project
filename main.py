@@ -1,14 +1,10 @@
-import os
 import streamlit as st
-import cohere
-from dotenv import load_dotenv
-from pdf_to_vectorstore import get_pdf_text, get_text_chunks, get_vectorstore
-from cohere_fct import chatting_with_cohere, response_to_question, prompting_draft
 import base64
+from load_mistral import load_mistral
+from mixtralexecute import load_split, create_retriever, question_answer, summarize
+from langchain.chains import ConversationalRetrievalChain
 
-load_dotenv()
-cohere_api_key = os.getenv("API_KEY_COHERE")
-cohere_client = cohere.Client(api_key=cohere_api_key)
+llm = load_mistral()
 
 
 def main():  # Objectif : Le point d'entrée principal de l'application Streamlit.
@@ -59,29 +55,37 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
         if st.button("Process"):
             with st.spinner("Traitement en cours"):
                 # get the pdf text
-                raw_text = get_pdf_text(pdf_docs)
-                summary = chatting_with_cohere(raw_text, cohere_client)
+
+                raw_text = load_split(pdf_docs)
+                retriever = create_retriever(raw_text)
+
+                st.session_state.retriever = retriever
+
+                qa_chain = ConversationalRetrievalChain.from_llm(
+                    llm, retriever, return_source_documents=True
+                )
+
+                summary = summarize(qa_chain)
                 st.session_state.summary = summary
-                # get the chunk
-                text_chunks = get_text_chunks(raw_text)
-                # create vector store, embedding = mettre en vecteur pour stocker
-                vectorstore = get_vectorstore(text_chunks)
-                if vectorstore:
-                    st.success("Document téléchargé avec succès !")
-                    st.session_state.vectorstore = vectorstore
 
         if st.button("Simulateur de risque"):
             st.switch_page("pages/page2.py")
 
-    if "vectorstore" in st.session_state:
+    if "retriever" in st.session_state:
         with st.container(border=True):
             st.subheader("Résumé du document :")
             st.write(st.session_state.summary)
 
         question = st.text_input("Posez une question sur le document : ")
         if question:
-            vectordb = st.session_state.vectorstore
-            answering = response_to_question(question, vectordb, cohere_api_key)
+
+            retriever = st.session_state.retriever
+
+            qa_chain = ConversationalRetrievalChain.from_llm(
+                llm, retriever, return_source_documents=True
+            )
+
+            answering = question_answer(question, qa_chain)
             st.write(answering)
     else:
         with st.container(border=True):
