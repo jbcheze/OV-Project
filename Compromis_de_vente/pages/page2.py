@@ -180,8 +180,9 @@ with st.container(border=True):
                     utilisation_bien,
                 )
             )
-            + " Votre niveau de risque est : "
-            + str(classer_risque(risque_computed))
+            + " <br>Votre niveau de risque est : "
+            + str(classer_risque(risque_computed)),
+            unsafe_allow_html=True,
         )
 
 

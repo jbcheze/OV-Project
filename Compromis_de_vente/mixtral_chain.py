@@ -1,26 +1,14 @@
-from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import HuggingFaceEmbeddings
-
 from langchain.vectorstores import Chroma
 
 
-def load_split(document_loadded):
-
-    # Load the pdf file and split it into smaller chunks
-    loader = PyPDFLoader(document_loadded)
-    documents = loader.load()
-
-    # Split the documents into smaller chunks
+def create_retriever(pdf_loaded):
     text_splitter = CharacterTextSplitter(
         chunk_size=1500, chunk_overlap=0
     )  # Le paramètre chunk_overlap détermine le nombre de caractères qui se chevauchent entre deux segments de texte consécutifs lors du découpage du texte en morceaux (chunks).
-    texts = text_splitter.split_documents(documents)
+    texts = text_splitter.split_documents(pdf_loaded)
 
-    return texts
-
-
-def create_retriever(texts):
     # We will use HuggingFace embeddings
     embeddings = HuggingFaceEmbeddings()
 
@@ -35,12 +23,6 @@ def create_retriever(texts):
     return retriever
 
 
-# We are using Mistral-7B for this question answering
-
-
-# We will run an infinite loop to ask questions to LLM and retrieve answers untill the user wants to quit
-
-
 def question_answer(query, qa_chain):
     chat_history = []
     # while True:
@@ -51,9 +33,8 @@ def question_answer(query, qa_chain):
     # sys.exit()
     result = qa_chain({"question": query, "chat_history": chat_history})
     print("Answer: " + result["answer"] + "\n")
-    chat_history.append((query, result["answer"]))
 
-    return result, chat_history
+    return result["answer"]
 
 
 def summarize(qa_chain):
@@ -62,7 +43,7 @@ def summarize(qa_chain):
         - section "Coordonnées du Vendeur et de l'Acquéreur"
         - section "Bien Immobilier"
         - section "Hypothèque et servitudes"
-        - section "Dossier du Diagnostic Technique (DDT ) (mets une phrase sur le DPE en plus)
+        - section "Dossier du Diagnostic Technique (DDT) 
         - section "Montant et Modalités de Paiement"
         - section "Durée de Validité de la Promesse de Vente et Date Limite de Signature de l'Acte de Vente Définitif"
         - section "Montant de l'Indemnité d'Immobilisation et Conditions Suspensives"

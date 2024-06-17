@@ -1,8 +1,10 @@
 import streamlit as st
 import base64
-from load_mistral import load_mistral
-from mixtralexecute import load_split, create_retriever, question_answer, summarize
+from mixtral_loader import load_mistral
+from mixtral_chain import create_retriever, question_answer, summarize
 from langchain.chains import ConversationalRetrievalChain
+from document_loader import upload_file, load_doc
+
 
 llm = load_mistral()
 
@@ -47,26 +49,26 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
         img_path = "images/logo_ov2.png"
         st.image(img_path, use_column_width=True)  # width=120
         st.subheader("Vos documents")
-        pdf_docs = st.file_uploader(
-            "Téléchargez vos PDFs ici et cliquez sur 'Process'",
-            accept_multiple_files=True,
-        )
+        uploaded_file = upload_file()
+
+        # with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        #     temp_file.write(pdf_docs.read())
 
         if st.button("Process"):
             with st.spinner("Traitement en cours"):
                 # get the pdf text
+                if uploaded_file:
+                    raw_text = load_doc(uploaded_file)
+                    retriever = create_retriever(raw_text)
 
-                raw_text = load_split(pdf_docs)
-                retriever = create_retriever(raw_text)
+                    st.session_state.retriever = retriever
 
-                st.session_state.retriever = retriever
+                    qa_chain = ConversationalRetrievalChain.from_llm(
+                        llm, retriever, return_source_documents=True
+                    )
 
-                qa_chain = ConversationalRetrievalChain.from_llm(
-                    llm, retriever, return_source_documents=True
-                )
-
-                summary = summarize(qa_chain)
-                st.session_state.summary = summary
+                    summary = summarize(qa_chain)
+                    st.session_state.summary = summary
 
         if st.button("Simulateur de risque"):
             st.switch_page("pages/page2.py")
