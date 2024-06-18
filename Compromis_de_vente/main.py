@@ -16,7 +16,6 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
     with open(mv1, "rb") as image_file:
         encoded_image = base64.b64encode(image_file.read()).decode()
 
-    # Use st.markdown with HTML to control the layout
     st.markdown(
         f"""
         <style>
@@ -39,16 +38,41 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
         """,
         unsafe_allow_html=True,
     )
-    # col1, col2 = st.columns([3, 1], gap="small")
-    # with col1:
-    #     st.header("Compromis de vente immobilier ")
-    # with col2:
-    #     st.image(mv1, width=75)
 
     with st.sidebar:
         img_path = "images/logo_ov2.png"
-        st.image(img_path, use_column_width=True)  # width=120
+        st.image(img_path, use_column_width=True)
         st.subheader("Vos documents")
+
+        loader_style = """
+        <style>
+        #loader {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 12px;
+            height: 12px;
+            -webkit-animation: spin 2s linear infinite; /* Safari */
+            animation: spin 2s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
+            margin-bottom: -2px;
+        }
+
+        /* Safari */
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        </style>
+        """
+
+        st.markdown(loader_style, unsafe_allow_html=True)
         uploaded_file = upload_file()
 
         # with tempfile.NamedTemporaryFile(delete=False) as temp_file:
@@ -58,20 +82,32 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
             if not uploaded_file:
                 st.error("Veuillez chargez votre document puis réessayez.")
             else:
-
+                loader_placeholder = st.empty()
                 progress_bar = st.progress(0)
                 progress_percentage = st.empty()
 
                 # get the pdf text
                 if uploaded_file:
+
+                    loader_placeholder.markdown(
+                        '<div>Traitement en cours: 0%<div id="loader"></div></div>',
+                        unsafe_allow_html=True,
+                    )
                     progress_bar.progress(0)
-                    progress_percentage.text("Traitement en cours: 0%")
                     raw_text = load_doc(uploaded_file)
+
+                    loader_placeholder.markdown(
+                        '<div>Traitement en cours: 25%<div id="loader"></div></div>',
+                        unsafe_allow_html=True,
+                    )
                     progress_bar.progress(25)
-                    progress_percentage.text("Traitement en cours: 25%")
                     retriever = create_retriever(raw_text)
+
+                    loader_placeholder.markdown(
+                        '<div>Traitement en cours: 70%<div id="loader"></div></div>',
+                        unsafe_allow_html=True,
+                    )
                     progress_bar.progress(70)
-                    progress_percentage.text("Traitement en cours: 70% ")
                     st.session_state.retriever = retriever
 
                     qa_chain = ConversationalRetrievalChain.from_llm(
@@ -80,11 +116,16 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
 
                     summary = summarize(qa_chain)
                     st.session_state.summary = summary
+
+                    loader_placeholder.markdown(
+                        '<div>Traitement en cours: 100%<div id="loader"></div></div>',
+                        unsafe_allow_html=True,
+                    )
                     progress_bar.progress(100)
-                    progress_percentage.text("Traitement en cours: 100%")
                     time.sleep(0.5)
                     progress_bar.empty()
                     progress_percentage.empty()
+                    loader_placeholder.empty()
                     st.success("Fichier téléchargé avec succès!")
 
         if st.button("Simulateur de risque"):
@@ -98,8 +139,8 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
         question = st.text_input("Posez une question sur le document : ")
         question_template = f"""
         
-        N'invente pas de réponse ou tu seras puni
-        Si tu ne sais pas, réponds "Non mentionné"
+        N'invente pas de réponse ou tu seras puni.
+        Si tu ne sais pas, réponds que ce n'est pas mentionné.
         Réponds en français et en te basant seulement et SEULEMENT sur les informations fournies par le document à cette question :
         {question}
         
