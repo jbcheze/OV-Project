@@ -4,7 +4,7 @@ from mixtral_loader import load_mistral
 from mixtral_chain import create_retriever, question_answer, summarize
 from langchain.chains import ConversationalRetrievalChain
 from document_loader import upload_file, load_doc
-
+import time
 
 llm = load_mistral()
 
@@ -55,12 +55,23 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
         #     temp_file.write(pdf_docs.read())
 
         if st.button("Process"):
-            with st.spinner("Traitement en cours"):
+            if not uploaded_file:
+                st.error("Veuillez chargez votre document puis réessayez.")
+            else:
+
+                progress_bar = st.progress(0)
+                progress_percentage = st.empty()
+
                 # get the pdf text
                 if uploaded_file:
+                    progress_bar.progress(0)
+                    progress_percentage.text("Traitement en cours: 0%")
                     raw_text = load_doc(uploaded_file)
+                    progress_bar.progress(25)
+                    progress_percentage.text("Traitement en cours: 25%")
                     retriever = create_retriever(raw_text)
-
+                    progress_bar.progress(70)
+                    progress_percentage.text("Traitement en cours: 70% ")
                     st.session_state.retriever = retriever
 
                     qa_chain = ConversationalRetrievalChain.from_llm(
@@ -69,6 +80,12 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
 
                     summary = summarize(qa_chain)
                     st.session_state.summary = summary
+                    progress_bar.progress(100)
+                    progress_percentage.text("Traitement en cours: 100%")
+                    time.sleep(0.5)
+                    progress_bar.empty()
+                    progress_percentage.empty()
+                    st.success("Fichier téléchargé avec succès!")
 
         if st.button("Simulateur de risque"):
             st.switch_page("pages/page2.py")
@@ -79,15 +96,20 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
             st.write(st.session_state.summary)
 
         question = st.text_input("Posez une question sur le document : ")
+        question_template = f"""
+        
+        N'invente pas de réponse ou tu seras puni
+        Si tu ne sais pas, réponds "Non mentionné"
+        Réponds en français et en te basant seulement et SEULEMENT sur les informations fournies par le document à cette question :
+        {question}
+        
+        """
+        retriever = st.session_state.retriever
+        qa_chain = ConversationalRetrievalChain.from_llm(
+            llm, retriever, return_source_documents=True
+        )
         if question:
-
-            retriever = st.session_state.retriever
-
-            qa_chain = ConversationalRetrievalChain.from_llm(
-                llm, retriever, return_source_documents=True
-            )
-
-            answering = question_answer(question, qa_chain)
+            answering = question_answer(question_template, qa_chain)
             st.write(answering)
     else:
         with st.container(border=True):

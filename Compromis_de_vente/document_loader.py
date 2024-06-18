@@ -1,9 +1,10 @@
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 from typing import Optional
 from tempfile import NamedTemporaryFile
 import streamlit as st
+import time
 
 
 def upload_file() -> Optional[str]:
@@ -24,4 +25,5 @@ def load_doc(doc_link):
     loader = PyPDFLoader(doc_link)
     documents = loader.load()
 
+    time.sleep(2)
     return documents
