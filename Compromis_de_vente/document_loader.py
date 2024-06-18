@@ -1,4 +1,4 @@
-from langchain.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 from typing import Optional
