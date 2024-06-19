@@ -23,7 +23,6 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
     with st.sidebar:
         img_path = "images/logo_ov2.png"
         st.image(img_path, use_column_width=True)
-        # st.subheader("Vos documents")
 
         spinner_style = spinner()
 
