@@ -85,19 +85,25 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
             st.switch_page("pages/page2.py")
 
     if "retriever" in st.session_state:
-        with st.container(border=True):
-            st.subheader("Synthèse :")
-            # st.write(st.session_state.summary)
-            progressive_summary = ""
-            text_placeholder = st.empty()
+        if "summary_by_char" not in st.session_state:
+            with st.container(border=True):
+                st.subheader("Synthèse :")
+                progressive_summary = ""
+                text_placeholder = st.empty()
 
-            for char in st.session_state.summary:
-                progressive_summary += (
-                    char  # Add the next character to the progressive summary
-                )
-                text_placeholder.markdown(progressive_summary, unsafe_allow_html=True)
-                time.sleep(0.005)
-
+                for char in st.session_state.summary:
+                    progressive_summary += (
+                        char  # Add the next character to the progressive summary
+                    )
+                    text_placeholder.markdown(
+                        progressive_summary, unsafe_allow_html=True
+                    )
+                    time.sleep(0.005)
+            st.session_state.summary_by_char = st.session_state.summary
+        else:
+            with st.container(border=True):
+                st.subheader("Synthèse :")
+                st.write(st.session_state.summary)
         question = st.text_input("Posez une question sur le document : ")
         question_template = f"""
         
