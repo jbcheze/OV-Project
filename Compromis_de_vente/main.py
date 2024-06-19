@@ -87,8 +87,17 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
 
     if "retriever" in st.session_state:
         with st.container(border=True):
-            st.subheader("**Synthèse :**")
-            st.write(st.session_state.summary)
+            st.subheader("Synthèse :")
+            # st.write(st.session_state.summary)
+            progressive_summary = ""
+            text_placeholder = st.empty()
+
+            for char in st.session_state.summary:
+                progressive_summary += (
+                    char  # Add the next character to the progressive summary
+                )
+                text_placeholder.markdown(progressive_summary, unsafe_allow_html=True)
+                time.sleep(0.005)
 
         question = st.text_input("Posez une question sur le document :")
 
