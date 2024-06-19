@@ -64,7 +64,7 @@ def summarize(qa_chain):
 
     result = qa_chain({"question": prompt, "chat_history": chat_history})
 
-    time.sleep(2)
+    time.sleep(2),
     return result["answer"]
 
 

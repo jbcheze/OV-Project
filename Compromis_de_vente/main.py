@@ -98,7 +98,7 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
                 text_placeholder.markdown(progressive_summary, unsafe_allow_html=True)
                 time.sleep(0.005)
 
-        question = st.text_input("Posez une question sur le document :")
+        question = st.text_input("**Posez une question sur le document :**")
 
         question_template = f"""
 
