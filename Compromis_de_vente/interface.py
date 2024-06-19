@@ -9,17 +9,20 @@ def titre(encoded_image):
         .header-container {{
             display: flex;
             align-items: center;
+            justify-content: center; /* Center horizontally */
+            margin-bottom: 50px;  /* Add space below the container */
         }}
         .header-text {{
-            font-size: 2em;
-            margin-right: 10px;  /* Adjust this value to control the space between text and image */
+            font-size: 2.2em;  /* Increase font size */
+            margin: 0;  /* Remove any margin */
         }}
         .header-image img {{
-            width: 50px;
+            width: 55px;
+            margin-left: 10px;  /* Add some space between text and image */
         }}
         </style>
         <div class="header-container">
-            <div class="header-text">Compromis de vente immobilier</div>
+            <div class="header-text"><b>Compromis de vente immobilier</b></div>
             <div class="header-image"><img src="data:image/png;base64,{encoded_image}" alt="Maison"></div>
         </div>
         """,
