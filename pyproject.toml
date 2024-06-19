@@ -34,6 +34,7 @@ streamlit-option-menu = "^0.3.13"
 streamlit-extras = "^0.4.3"
 langchain-huggingface = "^0.0.3"
 mistralai = "^0.4.0"
+pypdf = "^4.2.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.4.2"
