@@ -42,7 +42,7 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
     with st.sidebar:
         img_path = "images/logo_ov2.png"
         st.image(img_path, use_column_width=True)
-        st.subheader("Vos documents")
+        # st.subheader("Vos documents")
 
         loader_style = """
         <style>
@@ -133,10 +133,11 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
 
     if "retriever" in st.session_state:
         with st.container(border=True):
-            st.subheader("Résumé du document :")
+            st.subheader("**Synthèse :**")
             st.write(st.session_state.summary)
 
-        question = st.text_input("Posez une question sur le document : ")
+        question = st.text_input("Posez une question sur le document :")
+
         question_template = f"""
         
         N'invente pas de réponse ou tu seras puni.
