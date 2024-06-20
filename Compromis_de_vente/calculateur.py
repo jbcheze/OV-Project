@@ -24,6 +24,34 @@ def calculer_risque(
     projets_revente,
     utilisation_bien,
 ):
+    """_summary_
+
+    Args:
+        situation_pro (_type_): _description_
+        achat_immobilier (_type_): _description_
+        revenu_mensuel (_type_): _description_
+        revenus_supplementaires (_type_): _description_
+        montant_revenus_supplementaires (_type_): _description_
+        deja_proprietaire (_type_): _description_
+        antecedents_credit (_type_): _description_
+        dettes_en_cours (_type_): _description_
+        capital_disponible (_type_): _description_
+        montant_pret (_type_): _description_
+        duree_remboursement (_type_): _description_
+        budget_mensuel (_type_): _description_
+        epargne_mensuelle (_type_): _description_
+        prix_achat (_type_): _description_
+        type_bien (_type_): _description_
+        frais_copropriete (_type_): _description_
+        couts_renovation (_type_): _description_
+        taxes_foncieres (_type_): _description_
+        rester_longtemps (_type_): _description_
+        projets_revente (_type_): _description_
+        utilisation_bien (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     # Exemple simplifié de calcul de risque basé sur des règles
     risque = 0
 

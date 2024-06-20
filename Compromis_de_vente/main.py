@@ -13,7 +13,7 @@ llm = load_mistral()
 
 def main():  # Objectif : Le point d'entrée principal de l'application Streamlit.
     st.set_page_config(page_title="OV-Compromis", page_icon=":house:")
-    mv1 = "images/maison.png"
+    mv1 = "images/maison_bleu.png"
 
     with open(mv1, "rb") as image_file:
         encoded_image = base64.b64encode(image_file.read()).decode()

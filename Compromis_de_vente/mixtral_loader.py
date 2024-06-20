@@ -4,7 +4,11 @@ from langchain_community.llms import VLLMOpenAI
 
 
 def load_mistral():
+    """_summary_
 
+    Returns:
+        _type_: _description_
+    """
     load_dotenv()
     mixtral_api_key = os.getenv("MIXTRAL_API_KEY")
     MIXTRAL_API_BASE = os.getenv("MIXTRAL_API_BASE")
