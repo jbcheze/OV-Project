@@ -24,33 +24,37 @@ def calculer_risque(
     projets_revente,
     utilisation_bien,
 ):
-    """_summary_
+    """Calculate the risk score for an individual based on various financial and property factors.
+
+    This function calculates a risk score based on input parameters related to the individual's financial situation
+    and the property they intend to purchase. Factors such as income, existing debts, loan amount, property type,
+    renovation costs, and future plans are taken into account to determine the risk score.
 
     Args:
-        situation_pro (_type_): _description_
-        achat_immobilier (_type_): _description_
-        revenu_mensuel (_type_): _description_
-        revenus_supplementaires (_type_): _description_
-        montant_revenus_supplementaires (_type_): _description_
-        deja_proprietaire (_type_): _description_
-        antecedents_credit (_type_): _description_
-        dettes_en_cours (_type_): _description_
-        capital_disponible (_type_): _description_
-        montant_pret (_type_): _description_
-        duree_remboursement (_type_): _description_
-        budget_mensuel (_type_): _description_
-        epargne_mensuelle (_type_): _description_
-        prix_achat (_type_): _description_
-        type_bien (_type_): _description_
-        frais_copropriete (_type_): _description_
-        couts_renovation (_type_): _description_
-        taxes_foncieres (_type_): _description_
-        rester_longtemps (_type_): _description_
-        projets_revente (_type_): _description_
-        utilisation_bien (_type_): _description_
+        situation_pro (str): Professional situation of the individual.
+        achat_immobilier (str): Intention of buying property.
+        revenu_mensuel (int): Monthly income of the individual.
+        revenus_supplementaires (str): Whether there are additional income sources.
+        montant_revenus_supplementaires (str): Amount of additional income.
+        deja_proprietaire (str): Whether the individual already owns property.
+        antecedents_credit (str): Whether there is a credit history.
+        dettes_en_cours (str): Whether there are current debts.
+        capital_disponible (int): Available capital for down payment.
+        montant_pret (int): Loan amount requested.
+        duree_remboursement (str): Duration of the loan repayment.
+        budget_mensuel (str): Monthly budget for expenses.
+        epargne_mensuelle (int): Monthly savings amount.
+        prix_achat (int): Property purchase price.
+        type_bien (str): Type of property (new or old).
+        frais_copropriete (str): Condominium fees.
+        couts_renovation (int): Renovation costs.
+        taxes_foncieres (int): Property taxes.
+        rester_longtemps (str): Intention to stay long-term.
+        projets_revente (str): Plans for property resale.
+        utilisation_bien (str): Intended use of the property.
 
     Returns:
-        _type_: _description_
+        int: Risk score indicating the level of risk associated with the property purchase decision.
     """
     # Exemple simplifié de calcul de risque basé sur des règles
     risque = 0

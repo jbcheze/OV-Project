@@ -4,10 +4,14 @@ from langchain_community.llms import VLLMOpenAI
 
 
 def load_mistral():
-    """_summary_
+    """Load the Mistral language model.
+
+    This function loads environment variables to configure the Mistral language model using the VLLMOpenAI class.
+    It sets up the API keys and base URLs required for authentication and returns an instance of the language model
+    configured with the specified parameters
 
     Returns:
-        _type_: _description_
+        VLLMOpenAI: An instance of the Mistral language model configured with the provided API keys and settings.
     """
     load_dotenv()
     mixtral_api_key = os.getenv("MIXTRAL_API_KEY")
