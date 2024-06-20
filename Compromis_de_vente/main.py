@@ -12,6 +12,11 @@ llm = load_mistral()
 
 
 def main():  # Objectif : Le point d'entrée principal de l'application Streamlit.
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
     st.set_page_config(page_title="OV-Compromis", page_icon=":house:")
     mv1 = "images/maison_bleu.png"
 
