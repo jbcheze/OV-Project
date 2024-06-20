@@ -2,13 +2,17 @@ import streamlit as st
 
 
 def titre(encoded_image):
-    """_summary_
+    """Generate a styled header for a real estate sale agreement.
+
+    This function generates and returns a styled HTML header containing a title and an image.
+    The header is styled using CSS and the image is displayed using a base64 encoded string.
 
     Args:
-        encoded_image (_type_): _description_
+        encoded_image (str): Base64 encoded image string to be displayed in the header.
+
 
     Returns:
-        _type_: _description_
+        StreamlitDeltaGenerator: Streamlit object representing the styled header.
     """
 
     style = st.markdown(
@@ -40,10 +44,13 @@ def titre(encoded_image):
 
 
 def spinner():
-    """_summary_
+    """Generate the CSS for a loading spinner.
+
+        This function generates and returns a string containing CSS styles for a loading spinner.
+    The spinner is styled as a small, rotating circle with specific dimensions and colors.
 
     Returns:
-        _type_: _description_
+        str: CSS styles for a loading spinner.
     """
     loader_style = """
     <style>

@@ -111,12 +111,12 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
                 st.write(st.session_state.summary)
         question = st.text_input("Posez une question sur le document : ")
         question_template = f"""
-        
+
         N'invente pas de réponse ou tu seras puni.
         Si tu ne sais pas, réponds que ce n'est pas mentionné.
         Réponds en français et en te basant seulement et SEULEMENT sur les informations fournies par le document à cette question :
         {question}
-        
+
         """
         retriever = st.session_state.retriever
         qa_chain = ConversationalRetrievalChain.from_llm(
