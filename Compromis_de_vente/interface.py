@@ -2,6 +2,14 @@ import streamlit as st
 
 
 def titre(encoded_image):
+    """_summary_
+
+    Args:
+        encoded_image (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
 
     style = st.markdown(
         f"""
@@ -32,6 +40,11 @@ def titre(encoded_image):
 
 
 def spinner():
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
     loader_style = """
     <style>
     #loader {

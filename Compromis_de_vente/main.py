@@ -12,8 +12,13 @@ llm = load_mistral()
 
 
 def main():  # Objectif : Le point d'entrée principal de l'application Streamlit.
+    """_summary_
+
+    Returns:
+        _type_: _description_
+    """
     st.set_page_config(page_title="OV-Compromis", page_icon=":house:")
-    mv1 = "images/maison.png"
+    mv1 = "images/maison_bleu.png"
 
     with open(mv1, "rb") as image_file:
         encoded_image = base64.b64encode(image_file.read()).decode()
@@ -85,21 +90,26 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
             st.switch_page("pages/page2.py")
 
     if "retriever" in st.session_state:
-        with st.container(border=True):
-            st.subheader("Synthèse :")
-            # st.write(st.session_state.summary)
-            progressive_summary = ""
-            text_placeholder = st.empty()
+        if "summary_by_char" not in st.session_state:
+            with st.container(border=True):
+                st.subheader("Synthèse :")
+                progressive_summary = ""
+                text_placeholder = st.empty()
 
-            for char in st.session_state.summary:
-                progressive_summary += (
-                    char  # Add the next character to the progressive summary
-                )
-                text_placeholder.markdown(progressive_summary, unsafe_allow_html=True)
-                time.sleep(0.005)
-
-        question = st.text_input("**Posez une question sur le document :**")
-
+                for char in st.session_state.summary:
+                    progressive_summary += (
+                        char  # Add the next character to the progressive summary
+                    )
+                    text_placeholder.markdown(
+                        progressive_summary, unsafe_allow_html=True
+                    )
+                    time.sleep(0.005)
+            st.session_state.summary_by_char = st.session_state.summary
+        else:
+            with st.container(border=True):
+                st.subheader("Synthèse :")
+                st.write(st.session_state.summary)
+        question = st.text_input("Posez une question sur le document : ")
         question_template = f"""
 
         N'invente pas de réponse ou tu seras puni.

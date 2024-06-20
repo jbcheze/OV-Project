@@ -9,6 +9,14 @@ import time
 
 
 def create_retriever(pdf_loaded):
+    """_summary_
+
+    Args:
+        pdf_loaded (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     text_splitter = CharacterTextSplitter(
         chunk_size=2000, chunk_overlap=250
     )  # Le paramètre chunk_overlap détermine le nombre de caractères qui se chevauchent entre deux segments de texte consécutifs lors du découpage du texte en morceaux (chunks).
@@ -30,6 +38,15 @@ def create_retriever(pdf_loaded):
 
 
 def question_answer(query, qa_chain):
+    """_summary_
+
+    Args:
+        query (_type_): _description_
+        qa_chain (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
     chat_history = []
     # while True:
     # query = input("Prompt: ")
@@ -44,6 +61,15 @@ def question_answer(query, qa_chain):
 
 
 def summarize(qa_chain):
+    """_summary_
+
+    Args:
+        qa_chain (_type_): _description_
+
+    Returns:
+        _type_: _description_
+    """
+
     prompt = f"""
         Je souhaite que tu me rédiges un résumé du document qui sera organisé selon les points suivants:
         - section "Coordonnées du Vendeur et de l'Acquéreur"
@@ -66,21 +92,3 @@ def summarize(qa_chain):
 
     time.sleep(2),
     return result["answer"]
-
-
-# def summarize(qa_chain):
-#     prompt = f"""
-#         Je souhaite que tu me rédiges un résumé du document qui sera organisé selon les points suivants:
-
-#         - section "Diagnostics de Performance Energetique (DPE)" (en parlant seulement des classes)
-
-#     ,
-
-#     Tu rempliras chaque section avec les informations adéquates en organisant ton compte-rendu en bullet points."""
-
-#     # prompt = f"- Hypothèque et servitudes"
-
-#     chat_history = []
-
-#     result = qa_chain({"question": prompt, "chat_history": chat_history})
-#     return result["answer"]
