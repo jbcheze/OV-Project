@@ -65,7 +65,9 @@ def summarize(qa_chain):
     Returns:
         str: The summarized document organized by sections.
     """
+
     prompt = f"""
+        Je suis un agent immobilier et je travaille sur des compromis de vente 
         Je souhaite que tu me rédiges un résumé du document qui sera organisé selon les points suivants:
         - section "Coordonnées du Vendeur et de l'Acquéreur"
         - section "Bien Immobilier"
@@ -73,7 +75,7 @@ def summarize(qa_chain):
         - section "Dossier du Diagnostic Technique (DDT)"
         - section "Diagnostics de Performance Energetique (DPE)",(en parlant seulement des classes)
         - section "Montant et Modalités de Paiement"
-        - section "Durée de Validité de la Promesse de Vente et Date Limite de Signature de l'Acte de Vente Définitif"
+        - section "Date de Signature de l'Acte de Vente"
         - section "Montant de l'Indemnité d'Immobilisation et Conditions Suspensives"
     ,
 

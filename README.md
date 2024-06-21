@@ -1,12 +1,64 @@
-# OV-Project
+# OV-Compromis
 
-**But du Projet :**
+## Project Overview
 
-Dialoguer avec des documents. Ingerer des compromis de ventes (sous format pdf ou autre tel que scan). Puis génerer une synthèse grâce à une intelligence artificielle et par la suite pouvoir lui poser des questions sur ce compromis.
+**OV-Compromis** is an initiative by **Ahmed, Aladin, Hugo, Jean-Baptiste & Clement**, aimed at generating specific summaries from sales agreements. The project employs different technologies including **LLM** (Language Models), **RAG** (Retrieval-Augmented Generation) and the **LangChain** library.
 
-Bon courage.
+For further information on these principles, refer to the following documentation:
+
+
+- [Mistral LLM](https://docs.mistral.ai/)
+- [Chroma](https://docs.trychroma.com/guides/embeddings)
+- [LangChain](https://www.langchain.com/)
+
+
+
+## Installation
+
+
+### VS Code
+
+- **Installation**: Download and install from [Visual Studio Code](https://code.visualstudio.com/).
+- **Extensions**: Python, Pylance, Code Runner
+
+### Install Python
+
+For this project, you need at least [Python 3.11](https://www.python.org/downloads/).
+
+### Install Poetry
+
+- **Installation**: Install Poetry by following the instructions on [the Poetry website](https://python-poetry.org/docs/).
+
+
+## Project Configuration
+
+To install the project on your dedicated VS Code repository, you need to go through the following steps:
+
+
+- Open a new terminal and execute the following commands :
 
 ```bash
-curl -fsSL https://ollama.com/install.sh | sh
-sudo useradd -r -s /bin/false -m -d /usr/share/ollama ollama
+poetry install 
 ```
+
+```bash
+cd .\Compromis_de_vente\ 
+```
+
+Once this is done, to visualize the project, run :
+
+```bash
+poetry run streamlit run 📋_synthesizer.py 
+```
+
+
+### Project Status
+
+The project is currently in development. <br>
+ Good luck!
+
+
+
+
+
+
