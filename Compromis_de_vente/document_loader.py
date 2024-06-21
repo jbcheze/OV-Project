@@ -1,5 +1,4 @@
 from langchain_community.document_loaders import PyPDFLoader
-from langchain.text_splitter import CharacterTextSplitter
 from streamlit.runtime.uploaded_file_manager import UploadedFile
 from typing import Optional
 from tempfile import NamedTemporaryFile
@@ -40,7 +39,7 @@ def load_doc(doc_link):
     Returns:
         list: A list of document chunks extracted from the PDF.
     """
-    # Load the pdf file and split it into smaller chunks
+
     loader = PyPDFLoader(doc_link)
     documents = loader.load()
 

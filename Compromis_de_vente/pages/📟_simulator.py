@@ -12,9 +12,6 @@ with st.sidebar:
     img_path = "images/logo_ov2.png"
     st.image(img_path, use_column_width=True)
 
-    if st.button("Home"):
-        st.switch_page("main.py")
-
 
 with st.container(border=True):
     st.header("Répondre aux questions suivantes : ")

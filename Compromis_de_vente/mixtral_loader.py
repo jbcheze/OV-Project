@@ -16,7 +16,6 @@ def load_mistral():
     load_dotenv()
     mixtral_api_key = os.getenv("MIXTRAL_API_KEY")
     MIXTRAL_API_BASE = os.getenv("MIXTRAL_API_BASE")
-    huggingfacehub_api_token = os.getenv("huggingfacehub_api_token")
 
     llm = VLLMOpenAI(
         openai_api_key=mixtral_api_key,

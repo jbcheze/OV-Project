@@ -11,7 +11,7 @@ from interface import titre, spinner
 llm = load_mistral()
 
 
-def main():  # Objectif : Le point d'entrée principal de l'application Streamlit.
+def main():
     """_summary_
 
     Returns:
@@ -42,7 +42,6 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
                 progress_bar = st.progress(0)
                 progress_percentage = st.empty()
 
-                # get the pdf text
                 if uploaded_file:
 
                     loader_placeholder.markdown(
@@ -86,9 +85,6 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
                     loader_placeholder.empty()
                     st.success("Fichier téléchargé avec succès!")
 
-        if st.button("Simulateur de risque"):
-            st.switch_page("pages/page2.py")
-
     if "retriever" in st.session_state:
         if "summary_by_char" not in st.session_state:
             with st.container(border=True):
@@ -97,9 +93,7 @@ def main():  # Objectif : Le point d'entrée principal de l'application Streamli
                 text_placeholder = st.empty()
 
                 for char in st.session_state.summary:
-                    progressive_summary += (
-                        char  # Add the next character to the progressive summary
-                    )
+                    progressive_summary += char
                     text_placeholder.markdown(
                         progressive_summary, unsafe_allow_html=True
                     )
