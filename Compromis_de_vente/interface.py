@@ -1,7 +1,8 @@
 import streamlit as st
+from streamlit.delta_generator import DeltaGenerator
 
 
-def titre(encoded_image):
+def titre(encoded_image) -> DeltaGenerator:
     """Generate a styled header for a real estate sale agreement.
 
     This function generates and returns a styled HTML header containing a title and an image.
@@ -43,7 +44,7 @@ def titre(encoded_image):
     return style
 
 
-def spinner():
+def spinner() -> str:
     """Generate the CSS for a loading spinner.
 
         This function generates and returns a string containing CSS styles for a loading spinner.

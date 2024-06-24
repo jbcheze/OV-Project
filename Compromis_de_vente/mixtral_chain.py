@@ -3,11 +3,12 @@ from langchain.text_splitter import (
 )
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
-
+from langchain_core.vectorstores import VectorStoreRetriever
+from typing import List
 import time
 
 
-def create_retriever(pdf_loaded):
+def create_retriever(pdf_loaded) -> VectorStoreRetriever:
     """Create a retriever for semantic search from loaded PDF documents.
 
     This function splits the text of the loaded PDF documents into chunks, generates embeddings
@@ -32,7 +33,7 @@ def create_retriever(pdf_loaded):
     return retriever
 
 
-def question_answer(query, qa_chain):
+def question_answer(query, qa_chain) -> str:
     """Get an answer to a query using a question-answering chain.
 
     This function takes a query and a question-answering chain object, processes the query to obtain an answer,
@@ -45,14 +46,14 @@ def question_answer(query, qa_chain):
     Returns:
         str: The answer to the query.
     """
-    chat_history = []
+    chat_history: List = []
     result = qa_chain({"question": query, "chat_history": chat_history})
     print("Answer: " + result["answer"] + "\n")
 
     return result["answer"]
 
 
-def summarize(qa_chain):
+def summarize(qa_chain) -> str:
     """Generate a summary of a document organized by specific sections.
 
     This function generates a summary of a document based on a predefined template with specific sections.
@@ -81,7 +82,7 @@ def summarize(qa_chain):
 
     Tu rempliras chaque section avec les informations adéquates en organisant ton compte-rendu en bullet points."""
 
-    chat_history = []
+    chat_history: List = []
     result = qa_chain({"question": prompt, "chat_history": chat_history})
     time.sleep(2)
     return result["answer"]

@@ -1,6 +1,7 @@
 from langchain_community.document_loaders import PyPDFLoader
 from streamlit.runtime.uploaded_file_manager import UploadedFile
-from typing import Optional
+from typing import Optional, List
+from langchain.schema import Document
 from tempfile import NamedTemporaryFile
 import streamlit as st
 import time
@@ -27,7 +28,7 @@ def upload_file() -> Optional[str]:
     return temp_file.name
 
 
-def load_doc(doc_link):
+def load_doc(doc_link) -> List[Document]:
     """Load and split a PDF document into smaller chunks.
 
     This function loads a PDF document from a given file path or link and splits it into smaller

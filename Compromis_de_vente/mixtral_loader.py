@@ -1,9 +1,10 @@
 import os
 from dotenv import load_dotenv
 from langchain_community.llms import VLLMOpenAI
+from typing import Any
 
 
-def load_mistral():
+def load_mistral() -> Any:
     """Load the Mistral language model.
 
     This function loads environment variables to configure the Mistral language model using the VLLMOpenAI class.
