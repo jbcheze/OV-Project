@@ -35,14 +35,21 @@ For this project, you need at least [Python 3.11](https://www.python.org/downloa
 To install the project on your dedicated VS Code repository, you need to go through the following steps:
 
 
-- Open a new terminal and execute the following commands :
+- Open a new terminal and execute the following command :
 
 
 ```bash
 git clone https://github.com/hugues-04/OV-Project.git 
 ```
 
-- Once this is done and you have all the files uploaded in your folder execute in the terminal shell:
+- Once this is done and you have all the files uploaded in your folder, create a ".env" file which you will fill with your mistral keys as follows:
+
+```bash
+MIXTRAL_API_BASE= "<your_api_base>"
+MIXTRAL_API_KEY= "<your_api_key>"
+```
+
+- Then, execute in the terminal shell :
 
 ```bash
 poetry install 
@@ -58,15 +65,8 @@ cd .\Compromis_de_vente\
 poetry run streamlit run 📋_synthesizer.py 
 ```
 
-
 ### Project Status
 
 The project is currently in development. <br>
-If you have any suggestions, feel free to contact us at [Jean-Baptiste](jean-baptiste.cheze@openvalue.fr) or [Clément](clement.teulier@openvalue.fr)  .<br>
+If you have any suggestions, feel free to contact us at jean-baptiste.cheze@openvalue.fr or clement.teulier@openvalue.fr  .<br>
  Good luck!
-
-
-
-
-
-
