@@ -11,11 +11,16 @@ from interface import titre, spinner
 llm = load_mistral()
 
 
-def main():
-    """_summary_
+def main() -> None:
+    """Main function to orchestrate the application workflow.
+
+    This function sets up the Streamlit page configuration, handles image encoding,
+    manages the sidebar with file upload functionality, and processes the uploaded
+    file. It also handles displaying the summary of the processed document and
+    facilitates question-answering based on the document content.
 
     Returns:
-        _type_: _description_
+        Web app streamlit
     """
     st.set_page_config(page_title="OV-Compromis", page_icon=":house:")
     mv1 = "images/maison_bleu.png"

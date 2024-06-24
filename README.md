@@ -37,6 +37,13 @@ To install the project on your dedicated VS Code repository, you need to go thro
 
 - Open a new terminal and execute the following commands :
 
+
+```bash
+git clone https://github.com/hugues-04/OV-Project.git 
+```
+
+- Once this is done and you have all the files uploaded in your folder execute in the terminal shell:
+
 ```bash
 poetry install 
 ```
@@ -45,7 +52,7 @@ poetry install
 cd .\Compromis_de_vente\ 
 ```
 
-Once this is done, to visualize the project, run :
+- Finally, to visualize the project, run :
 
 ```bash
 poetry run streamlit run 📋_synthesizer.py 
@@ -55,6 +62,7 @@ poetry run streamlit run 📋_synthesizer.py
 ### Project Status
 
 The project is currently in development. <br>
+If you have any suggestions, feel free to contact us at [Jean-Baptiste](jean-baptiste.cheze@openvalue.fr) or [Clément](clement.teulier@openvalue.fr)  .<br>
  Good luck!
 
 

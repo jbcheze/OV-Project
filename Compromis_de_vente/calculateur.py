@@ -1,4 +1,4 @@
-# Calcul de risque
+from typing import Union
 
 
 def calculer_risque(
@@ -23,7 +23,7 @@ def calculer_risque(
     rester_longtemps,
     projets_revente,
     utilisation_bien,
-):
+) -> Union[int, str]:
     """Calculate the risk score for an individual based on various financial and property factors.
 
     This function calculates a risk score based on input parameters related to the individual's financial situation
@@ -111,7 +111,15 @@ def calculer_risque(
     return risque
 
 
-def classer_risque(score):
+def classer_risque(score) -> str:
+    """Returns the risk associated with the score obtained
+
+    Args:
+        score (int): computed score from the function above
+
+    Returns:
+        str: takes 3 different values depending on the risk
+    """
     if score <= 20:
         return "Parfait"
     elif 21 <= score <= 40:
