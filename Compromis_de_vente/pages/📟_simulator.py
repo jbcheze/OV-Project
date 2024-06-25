@@ -12,7 +12,7 @@ with open(mv1, "rb") as image_file:
     encoded_image = base64.b64encode(image_file.read()).decode()
 
 
-logo_OV = "images/V_Openvalue.png"
+logo_OV = "images/V_openvalue.png"
 
 st.set_page_config(page_title="OV-Simulateur", page_icon=logo_OV)
 interface_instance.titre(encoded_image, "Simulateur de Risque")

@@ -28,7 +28,7 @@ def main() -> None:
     Returns:
         Web app streamlit
     """
-    logo_OV = "images/V_Openvalue.png"
+    logo_OV = "images/V_openvalue.png"
 
     st.set_page_config(page_title="OV-Compromis", page_icon=logo_OV)
     mv1 = "images/maison_bleu.png"
