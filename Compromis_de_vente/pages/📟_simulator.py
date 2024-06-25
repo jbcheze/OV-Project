@@ -32,7 +32,9 @@ with st.container(border=True):
         "**Avez-vous des revenus supplémentaires ?**", ["***Oui***", "***Non***"]
     )
 
-    montant_revenus_supplementaires = st.text_input("Si oui, de quel montant ?")
+    montant_revenus_supplementaires = st.text_input(
+        "Si oui, de quel montant ? 0 sinon."
+    )
 
     deja_proprietaire = st.radio(
         "**Avez-vous déjà été propriétaire d'un bien immobilier ?**",

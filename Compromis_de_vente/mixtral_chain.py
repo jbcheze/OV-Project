@@ -75,7 +75,7 @@ def summarize(qa_chain) -> str:
         - section "Hypothèque et servitudes"
         - section "Dossier du Diagnostic Technique (DDT)"
         - section "Diagnostics de Performance Energetique (DPE)",(en parlant seulement des classes)
-        - section "Montant et Modalités de Paiement"
+        - section "Montant à payer et Modalités de Paiement"
         - section "Date de Signature de l'Acte de Vente"
         - section "Montant de l'Indemnité d'Immobilisation et Conditions Suspensives"
     ,

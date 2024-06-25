@@ -1,4 +1,5 @@
 from typing import Union
+import streamlit as st
 
 
 def calculer_risque(
@@ -77,15 +78,24 @@ def calculer_risque(
     except ValueError:
         return "Erreur: Durée de remboursement non valide."
 
+    if situation_pro == "CDD":
+        risque += 10
+    if achat_immobilier == "Seul":
+        risque += 5
     if revenu_mensuel < 2000:
         risque += 10
+    if int(montant_revenus_supplementaires) <= 0:
+        risque = +5
     if dettes_en_cours == "***Oui***":
         risque += 10
     if revenus_supplementaires == "***Non***":
         risque += 5
 
-    if montant_pret > (revenu_mensuel * 12 * duree_remboursement_annees):
+    if int(montant_pret) > (revenu_mensuel * 12 * duree_remboursement_annees):
         risque += 15
+
+    if int(budget_mensuel) > (0.7 * revenu_mensuel):
+        risque += 10
 
     if deja_proprietaire == "***Non***":
         risque += 5
@@ -94,7 +104,8 @@ def calculer_risque(
 
     if type_bien == "***Ancien***":
         risque += 5
-
+    if int(frais_copropriete) >= (0.02 * revenu_mensuel):
+        risque += 5
     if epargne_mensuelle < 500:
         risque += 5
     if capital_disponible < (0.2 * prix_achat):
