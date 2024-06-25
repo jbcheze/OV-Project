@@ -28,13 +28,15 @@ def main() -> None:
     Returns:
         Web app streamlit
     """
-    st.set_page_config(page_title="OV-Compromis", page_icon=":house:")
+    logo_OV = "images/V_Openvalue.png"
+
+    st.set_page_config(page_title="OV-Compromis", page_icon=logo_OV)
     mv1 = "images/maison_bleu.png"
 
     with open(mv1, "rb") as image_file:
         encoded_image = base64.b64encode(image_file.read()).decode()
 
-    interface_instance.titre(encoded_image)
+    interface_instance.titre(encoded_image, "Compromis de Vente Immobilier")
 
     with st.sidebar:
         img_path = "images/logo_ov2.png"
@@ -135,7 +137,10 @@ def main() -> None:
     else:
         with st.container(border=True):
             st.subheader("Synthèse : ")
-            st.markdown("<div style='height: 300px;'></div>", unsafe_allow_html=True)
+            st.markdown(
+                "<div  style='height: 300px;'></div>",
+                unsafe_allow_html=True,
+            )
         question = st.text_input("Posez une question sur le document : ")
 
 
