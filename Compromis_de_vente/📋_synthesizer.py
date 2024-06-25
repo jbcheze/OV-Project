@@ -1,14 +1,20 @@
 import streamlit as st
 import base64
 import time
-from mixtral_loader import load_mistral
-from mixtral_chain import create_retriever, question_answer, summarize
+from mixtral_loader import MistralLLM
+from mixtral_chain import PDFtoSummary
+from document_loader import DocLoader
+from interface import Style
 from langchain.chains import ConversationalRetrievalChain
-from document_loader import upload_file, load_doc
-from interface import titre, spinner
 
 
-llm = load_mistral()
+interface_instance = Style()
+doc_loader_instance = DocLoader()
+mixtral_chain_instance = PDFtoSummary()
+mistral_instance = MistralLLM()
+
+
+llm = mistral_instance.load_mistral()
 
 
 def main() -> None:
@@ -28,16 +34,16 @@ def main() -> None:
     with open(mv1, "rb") as image_file:
         encoded_image = base64.b64encode(image_file.read()).decode()
 
-    titre(encoded_image)
+    interface_instance.titre(encoded_image)
 
     with st.sidebar:
         img_path = "images/logo_ov2.png"
         st.image(img_path, use_column_width=True)
 
-        spinner_style = spinner()
+        spinner_style = interface_instance.spinner()
 
         st.markdown(spinner_style, unsafe_allow_html=True)
-        uploaded_file = upload_file()
+        uploaded_file = doc_loader_instance.upload_file()
 
         if st.button("Process"):
             if not uploaded_file:
@@ -55,7 +61,7 @@ def main() -> None:
                     )
                     progress_bar.progress(0)
 
-                    raw_text = load_doc(uploaded_file)
+                    raw_text = doc_loader_instance.load_doc(uploaded_file)
 
                     loader_placeholder.markdown(
                         '<div>Traitement en cours: 25%<div id="loader"></div></div>',
@@ -63,7 +69,7 @@ def main() -> None:
                     )
                     progress_bar.progress(25)
 
-                    retriever = create_retriever(raw_text)
+                    retriever = mixtral_chain_instance.create_retriever(raw_text)
                     st.session_state.retriever = retriever
 
                     loader_placeholder.markdown(
@@ -76,7 +82,7 @@ def main() -> None:
                         llm, retriever, return_source_documents=True
                     )
 
-                    summary = summarize(qa_chain)
+                    summary = mixtral_chain_instance.summarize(qa_chain)
                     st.session_state.summary = summary
 
                     loader_placeholder.markdown(
@@ -122,7 +128,9 @@ def main() -> None:
             llm, retriever, return_source_documents=True
         )
         if question:
-            answering = question_answer(question_template, qa_chain)
+            answering = mixtral_chain_instance.question_answer(
+                question_template, qa_chain
+            )
             st.write(answering)
     else:
         with st.container(border=True):

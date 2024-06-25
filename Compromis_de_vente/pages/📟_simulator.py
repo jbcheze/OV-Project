@@ -1,6 +1,7 @@
 import streamlit as st
-from calculateur import calculer_risque, classer_risque
+from calculateur import CalculateRisk
 
+calculateur_instance = CalculateRisk()
 
 st.set_page_config(page_title="OV-simulateur", page_icon=":house:")
 
@@ -129,7 +130,7 @@ with st.container(border=True):
     )
 
     if st.button("Soumettre au calculateur"):
-        risque_computed = calculer_risque(
+        risque_computed = calculateur_instance.calculer_risque(
             situation_pro,
             achat_immobilier,
             revenu_mensuel,
@@ -155,7 +156,7 @@ with st.container(border=True):
         st.write(
             "Votre score est de : "
             + str(
-                calculer_risque(
+                calculateur_instance.calculer_risque(
                     situation_pro,
                     achat_immobilier,
                     revenu_mensuel,
@@ -180,6 +181,6 @@ with st.container(border=True):
                 )
             )
             + " <br>Votre niveau de risque est : "
-            + str(classer_risque(risque_computed)),
+            + str(calculateur_instance.classer_risque(risque_computed)),
             unsafe_allow_html=True,
         )

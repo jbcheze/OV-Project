@@ -4,26 +4,27 @@ from langchain_community.llms import VLLMOpenAI
 from typing import Any
 
 
-def load_mistral() -> Any:
-    """Load the Mistral language model.
+class MistralLLM:
+    def __init__(self):
+        """Initialise les variables d'environnement nécessaires pour le modèle."""
+        load_dotenv()
+        self.mixtral_api_key = os.getenv("MIXTRAL_API_KEY")
+        self.mixtral_api_base = os.getenv("MIXTRAL_API_BASE")
+        self.model_name = "mistralai/Mixtral-8X7B-Instruct-v0.1"
+        self.temperature = 0.0
+        self.max_tokens = 7000
 
-    This function loads environment variables to configure the Mistral language model using the VLLMOpenAI class.
-    It sets up the API keys and base URLs required for authentication and returns an instance of the language model
-    configured with the specified parameters
+    def load_mistral(self) -> Any:
+        """Charge le modèle de langage Mistral avec les paramètres configurés.
 
-    Returns:
-        VLLMOpenAI: An instance of the Mistral language model configured with the provided API keys and settings.
-    """
-    load_dotenv()
-    mixtral_api_key = os.getenv("MIXTRAL_API_KEY")
-    MIXTRAL_API_BASE = os.getenv("MIXTRAL_API_BASE")
-
-    llm = VLLMOpenAI(
-        openai_api_key=mixtral_api_key,
-        openai_api_base=MIXTRAL_API_BASE,
-        model_name="mistralai/Mixtral-8X7B-Instruct-v0.1",
-        temperature=0.0,
-        max_tokens=7000,
-    )
-
-    return llm
+        Returns:
+            VLLMOpenAI: Une instance du modèle de langage Mistral configuré.
+        """
+        llm = VLLMOpenAI(
+            openai_api_key=self.mixtral_api_key,
+            openai_api_base=self.mixtral_api_base,
+            model_name=self.model_name,
+            temperature=self.temperature,
+            max_tokens=self.max_tokens,
+        )
+        return llm
