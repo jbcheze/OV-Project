@@ -40,9 +40,10 @@ To install the project on your dedicated VS Code repository, you need to go thro
 
 ```bash
 git clone https://github.com/hugues-04/OV-Project.git 
+cd OV-project
 ```
 
-- Once this is done and you have all the files uploaded in your folder, create a ".env" file which you will fill with your mistral keys as follows:
+- Once this is done and you have all the files uploaded in your folder, **create a ".env"** file which you will fill with your mistral keys as follows:
 
 ```bash
 MIXTRAL_API_BASE= "<your_api_base>"
@@ -52,11 +53,11 @@ MIXTRAL_API_KEY= "<your_api_key>"
 - Then, execute in the terminal shell :
 
 ```bash
-poetry install 
+cd .\Compromis_de_vente\ 
 ```
 
 ```bash
-cd .\Compromis_de_vente\ 
+poetry install 
 ```
 
 - Finally, to visualize the project, run :
