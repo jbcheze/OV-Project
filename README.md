@@ -6,15 +6,11 @@
 
 For further information on these principles, refer to the following documentation:
 
-
 - [Mistral LLM](https://docs.mistral.ai/)
 - [Chroma](https://docs.trychroma.com/guides/embeddings)
 - [LangChain](https://www.langchain.com/)
 
-
-
 ## Installation
-
 
 ### VS Code
 
@@ -29,18 +25,18 @@ For this project, you need at least [Python 3.11](https://www.python.org/downloa
 
 - **Installation**: Install Poetry by following the instructions on [the Poetry website](https://python-poetry.org/docs/).
 
-
 ## Project Configuration
 
 To install the project on your dedicated VS Code repository, you need to go through the following steps:
 
-
 - Open a new terminal and execute the following command :
-
 
 ```bash
 git clone https://github.com/hugues-04/OV-Project.git 
-cd OV-project
+```
+
+```bash
+cd .\OV-Project\
 ```
 
 - Once this is done and you have all the files uploaded in your folder, **create a ".env"** file which you will fill with your mistral keys as follows:
