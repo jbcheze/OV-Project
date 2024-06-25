@@ -1,11 +1,21 @@
 import streamlit as st
 from calculateur import CalculateRisk
+from interface import Style
+import base64
 
 calculateur_instance = CalculateRisk()
+interface_instance = Style()
 
-st.set_page_config(page_title="OV-simulateur", page_icon=":house:")
 
-st.title("Simulateur de risque :")
+mv1 = "images/maison_bleu.png"
+with open(mv1, "rb") as image_file:
+    encoded_image = base64.b64encode(image_file.read()).decode()
+
+
+logo_OV = "images/V_Openvalue.png"
+
+st.set_page_config(page_title="OV-Simulateur", page_icon=logo_OV)
+interface_instance.titre(encoded_image, "Simulateur de Risque")
 
 
 with st.sidebar:
@@ -15,7 +25,7 @@ with st.sidebar:
 
 
 with st.container(border=True):
-    st.header("Répondre aux questions suivantes : ")
+    st.subheader("Répondre aux questions suivantes : ")
 
     situation_pro = st.radio(
         " **Quelle est votre situation professionnelle actuelle ?** ",
@@ -52,8 +62,6 @@ with st.container(border=True):
         ["***Oui***", "***Non***"],
     )
 
-    # montant_dettes = st.text_input("Si oui, de quel montant ?")
-
     capital_disponible = st.text_input(
         "**Combien de capital avez-vous disponible pour l'apport initial ?**"
     )
@@ -79,8 +87,6 @@ with st.container(border=True):
     )
 
     epargne_mensuelle = st.text_input("**Combien épargnez-vous en moyenne par mois ?**")
-
-    # lieu_bien = st.text_input("**Où se situe le bien immobilier (ville) ?**")
 
     prix_achat = st.text_input("**Quel est le prix d'achat du bien immobilier ?**")
 

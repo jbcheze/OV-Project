@@ -4,7 +4,7 @@ from streamlit.delta_generator import DeltaGenerator
 
 class Style:
     @staticmethod
-    def titre(encoded_image: str) -> DeltaGenerator:
+    def titre(encoded_image, text) -> DeltaGenerator:
         """Generate a styled header for a real estate sale agreement.
 
         This function generates and returns a styled HTML header containing a title and an image.
@@ -12,6 +12,7 @@ class Style:
 
         Args:
             encoded_image (str): Base64 encoded image string to be displayed in the header.
+            text (str): Title of the page to be dispalyed in the header
 
         Returns:
             DeltaGenerator: Streamlit object representing the styled header.
@@ -35,7 +36,7 @@ class Style:
             }}
             </style>
             <div class="header-container">
-                <div class="header-text"><b>Compromis de vente immobilier</b></div>
+                <div class="header-text"><b>{text}</b></div>
                 <div class="header-image"><img src="data:image/png;base64,{encoded_image}" alt="Maison"></div>
             </div>
             """,
